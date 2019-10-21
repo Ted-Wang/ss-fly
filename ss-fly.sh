@@ -11,6 +11,7 @@ password='flyzy2005.com'
 port='8383'
 libsodium_file="libsodium-1.0.16"
 libsodium_url="https://github.com/jedisct1/libsodium/releases/download/1.0.16/libsodium-1.0.16.tar.gz"
+restart_with_no_warn="NO"
 
 fly_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -139,7 +140,12 @@ install_bbr() {
 
     	install_config
     	sysctl_config
-    	reboot_os
+    	#reboot_os
+        if [ "restart_with_no_warn"="YES" ]; then
+            reboot
+        else
+            reboot_os
+        fi
 }
 
 install_ssr() {
@@ -496,6 +502,10 @@ esac
 if [ "$EUID" -ne 0 ]; then
 	echo -e "[${red}错误${plain}] 必需以root身份运行，请使用sudo命令"
 	exit 1;
+fi
+
+if [ "$4" = "-Y" ] || [ "$3" = "-Y" ]; then
+    restart_with_no_warn="YES"
 fi
 
 case $1 in
