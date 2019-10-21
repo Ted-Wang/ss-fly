@@ -504,7 +504,7 @@ if [ "$EUID" -ne 0 ]; then
 	exit 1;
 fi
 
-if [ "$4" = "-Y" ] || [ "$3" = "-Y" ]; then
+if [ "$2" = "-Y" ] || [ "$3" = "-Y" ]; then
     restart_with_no_warn="YES"
 fi
 
