@@ -483,6 +483,11 @@ get_config_value(){
     cat /etc/shadowsocks.json | grep "\"$1\":"|awk -F ":" '{print $2}'| sed 's/\"//g;s/,//g;s/ //g'
 }
 
+add_alias(){
+    echo "alias ssconf='vim /etc/shadowsocks.json'" >> ~/.bashrc
+    echo "alias ssrestart='ssserver -c /etc/shadowsocks.json -d restart'" >> ~/.bashrc
+}
+
 if [ "$#" -eq 0 ]; then
 	usage
 	exit 0
@@ -511,6 +516,7 @@ fi
 case $1 in
 	-i|i|install )
         	install_ss $2 $3
+            add_alias
 		;;
         -bbr )
         	install_bbr
