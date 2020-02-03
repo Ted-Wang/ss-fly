@@ -486,6 +486,7 @@ get_config_value(){
 add_alias(){
     echo "alias ssconf='vim /etc/shadowsocks.json'" >> ~/.bashrc
     echo "alias ssrestart='ssserver -c /etc/shadowsocks.json -d restart'" >> ~/.bashrc
+    echo "alias sudo='sudo '" >> ~/.bashrc
 }
 
 if [ "$#" -eq 0 ]; then
